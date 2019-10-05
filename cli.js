@@ -51,6 +51,9 @@ const cli = {
 			else if(['store_true', 'store_false'].includes(action)){
 				value = action === 'store_true'
 			}
+			else if(['httpdns2'].includes(action)){
+				value = true
+			}
 			else{
 				let gap = args.slice(pointer).findIndex(part => part in optionals)
 				let next = gap === -1 ? args.length : pointer + gap
@@ -121,7 +124,7 @@ const help = () => {
 		let flags = option.flags
 		let name = option.metavar || option.dest
 		let use = ''
-		if(['store_true', 'store_false', 'help', 'version'].includes(option.action))
+		if(['store_true', 'store_false', 'help', 'version', 'httpdns2'].includes(option.action))
 			use = flags.map(flag => `${flag}`).join(', ')
 		else if(option.nargs === '+')
 			use = flags.map(flag => `${flag} ${name} [${name} ...]`).join(', ')
